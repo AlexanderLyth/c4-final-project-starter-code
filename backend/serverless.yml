@@ -33,15 +33,6 @@ provider:
     # Enable API Gateway logs
     restApi: true
 
-  iam:
-    role:
-      statements:
-        - Effect: Allow
-          Action:
-            - xray:PutTelemetryRecords
-            - xray:PutTraceSegments
-          Resource: "*"
-
 
 functions:
 
@@ -62,6 +53,8 @@ functions:
       - Effect: Allow
         Action:
           - dynamodb:Query
+          - xray:PutTelemetryRecords
+          - xray:PutTraceSegments
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}/index/CreatedAtIndex
 
   # TODO: Configure this function - 
@@ -83,6 +76,8 @@ functions:
       - Effect: Allow
         Action:
           - dynamodb:PutItem
+          - xray:PutTelemetryRecords
+          - xray:PutTraceSegments
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
 
   # TODO: Configure this function
@@ -102,6 +97,8 @@ functions:
       - Effect: Allow
         Action:
           - dynamodb:UpdateItem
+          - xray:PutTelemetryRecords
+          - xray:PutTraceSegments
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
 
   # TODO: Configure this function
@@ -118,6 +115,8 @@ functions:
       - Effect: Allow
         Action:
           - dynamodb:DeleteItem
+          - xray:PutTelemetryRecords
+          - xray:PutTraceSegments
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
 
   # TODO: Configure this function
@@ -138,6 +137,8 @@ functions:
       - Effect: Allow
         Action:
           - dynamodb:UpdateItem
+          - xray:PutTelemetryRecords
+          - xray:PutTraceSegments
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
 
 resources:

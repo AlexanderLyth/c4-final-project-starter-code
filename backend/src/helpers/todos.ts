@@ -11,18 +11,17 @@ import * as AWS from 'aws-sdk'
 // TODO: Implement businessLogic
 
 const logger = createLogger('Todos business logic')
+const bucket = process.env.ATTACHMENT_S3_BUCKET
+const signedUrlExpirationTime = process.env.SIGNED_URL_EXPIRATION
+const todoAcess = new TodosAcess();
+const attachmentUtils = new AttachmentUtils();
 
 const s3Bucket = new AWS.S3({
-    signatureVersion: 'v4'
-  })
-  
-  const bucket = process.env.ATTACHMENT_S3_BUCKET
-  const signedUrlExpirationTime = process.env.SIGNED_URL_EXPIRATION
-  const todoAcess = new TodosAcess();
-  const attachmentUtils = new AttachmentUtils();
+  signatureVersion: 'v4'
+})
+
 
   export async function getTodosFromUser(userId: string): Promise<TodoItem[]> {
-
     return todoAcess.getTodosFromUser(userId);
   }
   
